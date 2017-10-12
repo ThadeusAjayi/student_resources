@@ -17,15 +17,45 @@ db.once("open", () => {
     var Schema = mongoose.Schema;
     var StudentSchema = new Schema({
         name:   {type: String, default: "Student"},
-        age:    {type: String, default: 18},
+        age:    {type: Number, default: 18},
         sex:    {type: String, default: "Sex"},
-        level:  {type: String, default: "Undergraduate"},
+        level:  String, 
         department: {type: String, default: ""},
         faculty:    {type: String, default: ""}
     });
 
+    //Arrow functions fails here so normal function call for callback
+    StudentSchema.pre("save", function(next) {
+        if (this.level == undefined) {
+            if (this.age >= 25) {
+                this.level = "Graduate";
+            } else {
+                this.level = "Undergraduate";
+            }
+        }
+        next();
+    });
+
+    //Static  function for creating special queries on the module
+    //Static function without predefined search parameter
+    StudentSchema.statics.findLevel = function(level, callback) {
+        return this.find({level: level}, callback);
+    };
+
+    //Static function with predefined search parameter
+    StudentSchema.statics.findGraduates = function(callback) {
+        return this.find({sex: "F"}, callback);
+    };
+
+    //Instance methods on each document (i.e items in database)
+    //Search a document and others that have a similar property being checked
+    StudentSchema.methods.findAge = function(callback) {
+        //this == document 
+        return this.model("Student").find({level: "Graduate"}, callback);
+    }
+
     //Mongoose object called model
-    var Student = mongoose.model("Student",StudentSchema);
+    var Student = mongoose.model("Student", StudentSchema);
 
     var person = new Student({
         name: "Thadeus",
@@ -38,33 +68,56 @@ db.once("open", () => {
 
     var person2 = new Student({});
 
-    var nathan = new Student({
-        name: "Nathan",
-        age: 24,
-        sex: "M",
-        level: "Undergraduate",
-        department: "Computer Science",
-        faculty: "Science"
-    });
+    var studentsArray = [
+        {
+            name: "Tabitha",
+            age: 29,
+            sex: "F",
+            department: "Business Administration"
+        },
+        {
+            name: "Matilda",
+            age: 25,
+            sex: "F",
+            department: "Business Administration"
+        },
+        {
+            name: "Daisy",
+            age: 31,
+            sex: "F",
+            department: "Accounting"
+        },
+        {
+            name: "Martha",
+            age: 33,
+            sex: "F",
+            department: "Accounting"
+        },
+        person,
+        person2,
+        {
+            name: "Nathan",
+            age: 24,
+            sex: "M",
+            department: "Computer Science",
+            faculty: "Science"
+        }
+    ]
 
     Student.remove({}, (err) => {
         if (err) console.error(err);
-        person.save((err)=> {
-            if (err) console.error("Save Failed.", err);
-            person2.save((err) => {
-                if (err) console.error("Save Failed.", err);
-                nathan.save((err) => {
-                    if (err) console.error("Save Failed", err);
-                    Student.find({sex: "M"}, (err, students) => {
-                        students.forEach((student) => {
-                            console.log(student.name + " the " + student.age + " " + student.department)
-                        });
-                        db.close(() => {
-                            console.log("db Connection closed");
-                        });
+        Student.create(studentsArray,(err, students) => {
+            if (err) console.error("Save Failed", err);
+            Student.findOne({sex: "F"}, (err, student) => {
+                student.findAge((err, students) => {
+                    students.forEach((student) => {
+                        console.log(student.name + " the " + student.age + " year old " + student.department + " student is a/an " + student.level);
                     });
-                });                    
-            });
-        });
+                    db.close(() => {
+                        console.log("db Connection closed");
+                    });
+                });
+            });     
+        });  
     });
 });
