@@ -1,0 +1,22 @@
+{
+  "name": "student_resources",
+  "version": "1.0.0",
+  "description": "This is an assessment project for ALC 2.0 Web Intermediate track",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "API",
+    "Frontend",
+    "web"
+  ],
+  "author": "Ajayi Thadeus",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.20",
+    "morgan": "^1.7.0"
+  }
+}
