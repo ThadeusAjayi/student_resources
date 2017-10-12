@@ -18,7 +18,7 @@ db.once("open", () => {
     var StudentSchema = new Schema({
         name:   {type: String, default: "Student"},
         age:    {type: Number, default: 18},
-        sex:    {type: String, default: "Sex"},
+        sex:    {type: String, default: ""},
         level:  String, 
         department: {type: String, default: ""},
         faculty:    {type: String, default: ""}

@@ -2,15 +2,19 @@
 
 var express = require("express");
 var router = express.Router();
+var Student = require("./models").Student;
 
 //GET /resources
 //Route to get all students' resources
-router.get("/", (req, res) => {
-    res.json({response: "You sent me a GET request"});
+router.get("/", (req, res, next) => {
+    Student.find({}, (err, students) => {
+        if (err) return next(err);
+        res.json(students);
+    });
 });
 
 //GET /resources
-//Route to specific students' resources
+//Route to specific students' resources 
 router.get("/:id", (req, res) => {
     res.json({
         response: "You sent me a GET request" + req.params.id
