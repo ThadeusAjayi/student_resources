@@ -14,37 +14,53 @@ router.get("/", (req, res, next) => {
 });
 
 //GET /resources
-//Route to specific students' resources 
-router.get("/:id", (req, res) => {
-    res.json({
-        response: "You sent me a GET request" + req.params.id
+//Route to specific students' resources it is currently ObjetId in db
+router.get("/:id", (req, res, next) => {
+    Student.findById(req.params.id, (err, doc) => {
+        if (doc == null) return next(err);
+        res.json(doc);
     });
 });
 
 //POST /resources
 //Route to create students' resources
-router.post("/", (req, res) => {
-    res.json({
-        response: "You sent me a GET request",
-        body: req.body
+router.post("/", (req, res, next) => {
+    var student = new Student(req.body);
+    student.save((err, student) => {
+        if (err) return next(err);
+        res.status = 201;
+        res.json(student);
     });
 });
 
 //PUT /resources
 //Route to update students' resources
-router.put("/:id", (req, res) => {
-    res.json({
-        response: "You sent me a PUT request",
-        body: req.body
-    });
+router.put("/:id", (req, res, next) => {
+    Student.findById({_id: req.params.id}, (err, doc) => {
+        if (doc == null) return next (err);
+        doc.update(req.body, (err) => {
+            if (err) return next (err);
+            res.json({
+                response: "You sent to UPDATE " + doc.name
+            })
+        })
+    })
 });
 
 //DELETE /resources
 //Route to delete students' resources
-router.delete("/:id", (req, res) => {
-    res.json({
-        response: "You sent me a DELETE request " + req.params.id
-    });
+//TODO make sure delete doesnt send when item doesnt exit
+router.delete("/:id", (req, res, next) => {
+    Student.findById({_id: req.params.id}, (err, doc) => {
+        if (doc == null) return next(err);
+        Student.remove({_id: req.params.id}, (err) => {
+            if (err) return next(err);
+            res.status = 201;
+            res.json({
+                response: "You have sent to delete the user :" + doc.name
+            })
+        });
+    })
 });
 
 module.exports = router;

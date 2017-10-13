@@ -15,10 +15,10 @@ var StudentSchema = new Schema ({
 });
 
 //If all fails remove this
-StudentSchema.pre("save", function (next) {
-    this.sort();
-    next();
-});
+// StudentSchema.pre("save", function (next) {
+//     this.Student.name.sort();
+//     next();
+// });
 
 var Student = mongoose.model("Student", StudentSchema);
 
