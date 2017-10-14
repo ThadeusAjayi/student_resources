@@ -2,7 +2,7 @@
 
 var mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/sandbox");
+mongoose.connect("mongodb://localhost/sandbox");
 
 var db = mongoose.connection;
 
@@ -70,25 +70,25 @@ db.once("open", () => {
 
     var studentsArray = [
         {
-            name: "Tabitha",
+            name: "Jane",
             age: 29,
             sex: "F",
             department: "Business Administration"
         },
         {
-            name: "Matilda",
+            name: "Audrey",
             age: 25,
             sex: "F",
             department: "Business Administration"
         },
         {
-            name: "Daisy",
+            name: "Hillary",
             age: 31,
             sex: "F",
             department: "Accounting"
         },
         {
-            name: "Martha",
+            name: "Rice",
             age: 33,
             sex: "F",
             department: "Accounting"
@@ -96,7 +96,7 @@ db.once("open", () => {
         person,
         person2,
         {
-            name: "Nathan",
+            name: "Trump",
             age: 24,
             sex: "M",
             department: "Computer Science",
