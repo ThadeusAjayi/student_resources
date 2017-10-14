@@ -6,7 +6,12 @@ var Schema = mongoose.Schema;
 
 
 var StudentSchema = new Schema ({
-    name: String,
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
     age:  Number,
     sex: String, 
     level:  String, 
