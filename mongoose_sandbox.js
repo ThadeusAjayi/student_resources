@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 //mongodb://<dbuser>:<dbpassword>@ds243055.mlab.com:43055/student_resources
 var MONGOLAB_URI = "mongodb://Ainojie:p@lleter1@ds243055.mlab.com:43055/student_resources"
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(MONGOLAB_URI);
 
 var db = mongoose.connection;
 
