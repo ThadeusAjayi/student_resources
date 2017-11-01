@@ -7,12 +7,14 @@ var routes = require("./routes");
 var jsonParser = require("body-parser").json;
 var logger = require("morgan");
 
+
 app.use(logger("dev"));
 app.use(jsonParser());
 
 var mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/sandbox");
+//mongoose.connect("mongodb://localhost:27017/sandbox");
+mongoose.connect("mongodb://ainojie@gmail.com:p@lleter1@localhost:27017/sandbox");
 
 var db = mongoose.connection;
 
