@@ -4,9 +4,9 @@ var mongoose = require("mongoose");
 
 //mongoose.connect("mongodb://localhost/sandbox");
 //mongodb://<dbuser>:<dbpassword>@ds243055.mlab.com:43055/student_resources
-var MONGOLAB_URI = "mongodb://Ainojie:p@lleter1@ds243055.mlab.com:43055/student_resources"
+const MONGODB_URI = "mongodb://Ainojie:p@lleter1@ds243055.mlab.com:43055/student_resources";
 
-mongoose.connect(MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 var db = mongoose.connection;
 

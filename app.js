@@ -15,9 +15,9 @@ var mongoose = require("mongoose");
 
 //mongoose.connect("mongodb://localhost:27017/sandbox");
 //mongoose.connect("mongodb://ainojie@gmail.com:p@lleter1@localhost:27017/sandbox");
-var MONGOLAB_URI = "mongodb://Ainojie:p@lleter1@ds243055.mlab.com:43055/student_resources"
+const MONGODB_URI = "mongodb://Ainojie:p@lleter1@ds243055.mlab.com:43055/student_resources";
 
-mongoose.connect(MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 var db = mongoose.connection;
 
