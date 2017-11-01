@@ -2,7 +2,8 @@
 
 var mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/sandbox");
+//mongoose.connect("mongodb://localhost/sandbox");
+mongoose.connect("mongodb://ainojie@gmail.com:p@lleter1@localhost:27017/sandbox");
 
 var db = mongoose.connection;
 
