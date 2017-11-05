@@ -3,7 +3,6 @@
 var express = require("express");
 var app = express();
 var apiroutes = require("./apiroutes");
-var webroutes = require("./webroutes");
 
 var jsonParser = require("body-parser").json;
 var logger = require("morgan");
@@ -42,8 +41,6 @@ app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 
 app.use("/resources", apiroutes);
-
-app.use("/", webroutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
