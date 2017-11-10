@@ -12,3 +12,23 @@ Creating Students’ resource
 Listing Students’ resource
 Showing Students’ resource
 editing and deleting students on backend.
+
+# How to run project
+
+Download or clone the repository.
+If you don't already have node installed, download and install node.js.
+Navigate to project folder and run npm install.
+After successfull install, run npm start.
+Go to your browser and load : https://localhost:3000/resources
+
+
+# Feedback
+
+Mailto: ainojie@gmail.com
+Ajayi Thadeus
+
+# By
+
+Ajayi Thadeus
+Software Developer
+Android | Mean Stack
